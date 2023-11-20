@@ -3,6 +3,9 @@ import 'package:yoomegale/desktop/desktop.main.dart';
 import 'package:yoomegale/desktop/view/desktop.chat.dart';
 import 'package:yoomegale/desktop/view/video.chat.dart';
 import 'package:beamer/beamer.dart';
+import 'package:yoomegale/phone/phone.main.dart';
+import 'package:yoomegale/phone/view/phone.chat.dart';
+import 'package:yoomegale/phone/view/phone.video.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,9 +19,30 @@ class MyApp extends StatelessWidget {
     locationBuilder: RoutesLocationBuilder(
       routes: {
         // Return either Widgets or BeamPages if more customization is needed
-        '/': (context, state, data) => const DesktopMain(),
-        '/videochat': (context, state, data) => const DesktopVideoChat(),
-        '/chat':(context, state, data) => const DesktopChat()
+        '/': (context, state, data) => LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+              if (constraints.maxWidth > 600) {
+                return const DesktopMain();
+              } else {
+                return const PhoneMainScreen();
+              }
+            }),
+        '/videochat': (context, state, data) => LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+              if (constraints.maxWidth > 600) {
+                return const DesktopVideoChat();
+              } else {
+                return const PhoneVideoChat();
+              }
+            }),
+        '/chat': (context, state, data) => LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+              if (constraints.maxWidth > 600) {
+                return const DesktopChat();
+              } else {
+                return const PhoneChat();
+              }
+            })
       },
     ),
   );

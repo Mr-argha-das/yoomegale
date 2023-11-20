@@ -116,6 +116,7 @@ class _ChoseButtonState extends State<ChoseButton> {
               onTap: () {
                 Beamer.of(context).beamToNamed('/chat');
               },
+
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
